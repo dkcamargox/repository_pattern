@@ -7,18 +7,29 @@ from models.base import Base
 from models.client import Client
 from models.source import Source
 
+from abc import ABC, abstractmethod
+
 import json
 
-class ServiceAbstract():
+class ServiceAbstract(ABC):
     def __init__(self, entity: str, dao_class: DAO):
         raise NotImplementedError
 
+    @abstractmethod
     def create(self, dao) -> None:
         raise NotImplementedError
 
+    @abstractmethod
     def get_by_id(self, id: UUID) -> DAO:
         raise NotImplementedError
 
+
+class DBService(ServiceAbstract):
+    '''
+    From this service arises the SQLAlchemy service or even repository maybe?
+    This module could be only for abstractions and then the repositories are the actual implementations?
+    '''
+    pass
 
 class ApiService(ServiceAbstract):
 

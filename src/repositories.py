@@ -2,8 +2,9 @@
 from src.services import ServiceAbstract, ApiService, SqlAlchemyService
 from src.daos import DAO, Source, Client
 from uuid import UUID
+from abc import ABC, abstractmethod
 
-class RepositoryAbstract:
+class RepositoryAbstract(ABC):
     service_class: ServiceAbstract = None
     service: ServiceAbstract = None
     entity: str = None
@@ -14,9 +15,12 @@ class RepositoryAbstract:
             dao_class=self.dao
         )
     
+    # A class that has a metaclass derived from ABCMeta cannot be instantiated unless all of its abstract methods and properties are overridden. 
+    @abstractmethod
     def create(self, dao: DAO) -> None:
         return self.service.create(dao=dao)
     
+    @abstractmethod
     def get_by_id(self, id: UUID) -> DAO:
         return self.service.get_by_id(id=id)
 

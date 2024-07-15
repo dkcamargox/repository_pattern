@@ -10,7 +10,7 @@ class DAO:
                 self.__setattr__(key, value)
 
 
-class Client(DAO):
+class ClientDAO(DAO):
     
     code: str = None
     name:str = None
@@ -34,7 +34,7 @@ class Client(DAO):
         return f"""Client(\n\tcode={self.code!r},\n\tname={self.name!r},\n\tstatus={self.status!r}\n)"""
 
 
-class Source(DAO):
+class SourceDAO(DAO):
 
     type: str = None
     name: str = None
@@ -63,3 +63,5 @@ class Source(DAO):
     def __repr__(self) -> str:
         return f"""Source(\n\ttype={self.type!r},\n\tname={self.name!r},\n\tstatus={self.status!r}\n)"""
 
+    class FileDAO(DAO):
+        pass
